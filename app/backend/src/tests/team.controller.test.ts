@@ -3,9 +3,9 @@ import * as chai from 'chai';
 // @ts-ignore
 import chaiHttp = require('chai-http');
 import { findAllMock } from './mocks/mockTeams';
-import TeamService from '../database/services/team.service';
-import TeamController from '../database/controllers/team.controller';
-import TeamModel from '../database/models/team.model';
+import TeamService from '../services/team.service';
+import TeamController from '../controllers/team.controller';
+import TeamModel from '../models/team.model';
 import { app } from '../app';
 
 chai.use(chaiHttp);
@@ -36,7 +36,7 @@ describe('some tests in TeamController', () => {
       (TeamService.findById as sinon.SinonStub).restore();
     });
     
-    it('retorna um array do mock e um status 200', async () => {
+    it('retorna um objeto do mock e um status 200', async () => {
       // arrange
       sinon.stub(TeamService, 'findById').resolves(findAllMock[0] as TeamModel)
       // act

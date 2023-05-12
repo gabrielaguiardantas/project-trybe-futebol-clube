@@ -1,5 +1,8 @@
 import * as express from 'express';
-import TeamController from './database/controllers/team.controller';
+import TeamController from './controllers/team.controller';
+import verifyLoginFields from './middlewares/verifyLoginFields';
+import UserController from './controllers/user.controller';
+import validateJWT from './auth/validateJWT';
 
 class App {
   public app: express.Express;
@@ -13,6 +16,9 @@ class App {
     this.app.get('/', (req, res) => res.json({ ok: true }));
     this.app.get('/teams/:id', TeamController.findById);
     this.app.get('/teams', TeamController.findAll);
+
+    this.app.post('/login', verifyLoginFields, UserController.login);
+    this.app.get('/login/role', validateJWT, UserController.role);
   }
 
   private config():void {

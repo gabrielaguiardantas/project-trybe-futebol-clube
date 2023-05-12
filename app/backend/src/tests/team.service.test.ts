@@ -7,14 +7,14 @@ import { app } from '../app';
 import { findAllMock } from './mocks/mockTeams';
 
 import { Response } from 'superagent';
-import TeamService from '../database/services/team.service';
-import TeamModel from '../database/models/team.model';
+import TeamService from '../services/team.service';
+import TeamModel from '../models/team.model';
 
 chai.use(chaiHttp);
 
 const { expect } = chai;
 
-describe('some testes in TeamService', () => {
+describe('some tests in TeamService', () => {
   /**
    * Exemplo do uso de stubs com tipos
    */
