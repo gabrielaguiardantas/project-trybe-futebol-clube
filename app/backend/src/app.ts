@@ -3,6 +3,7 @@ import TeamController from './controllers/team.controller';
 import verifyLoginFields from './middlewares/verifyLoginFields';
 import UserController from './controllers/user.controller';
 import validateJWT from './auth/validateJWT';
+import MatchController from './controllers/match.controller';
 
 class App {
   public app: express.Express;
@@ -19,6 +20,8 @@ class App {
 
     this.app.post('/login', verifyLoginFields, UserController.login);
     this.app.get('/login/role', validateJWT, UserController.role);
+
+    this.app.get('/matches', MatchController.findAll);
   }
 
   private config():void {

@@ -1,5 +1,5 @@
 import { compare } from 'bcryptjs';
-import UserModel from '../models/user.model';
+import UserModel from '../database/models/user.model';
 import { Json } from '../interfaces/json.interface';
 import { User } from '../interfaces/user.interface';
 

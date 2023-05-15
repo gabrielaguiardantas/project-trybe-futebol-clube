@@ -8,7 +8,7 @@ import { findAllMock } from './mocks/mockTeams';
 
 import { Response } from 'superagent';
 import TeamService from '../services/team.service';
-import TeamModel from '../models/team.model';
+import TeamModel from '../database/models/team.model';
 
 chai.use(chaiHttp);
 

@@ -8,7 +8,7 @@ import { findAllMock } from './mocks/mockTeams';
 
 import { Response } from 'superagent';
 import TeamService from '../services/team.service';
-import UserModel from '../models/user.model';
+import UserModel from '../database/models/user.model';
 import UserService from '../services/user.service';
 import { validUserMock, validUserResultMock } from './mocks/mockUsers';
 
