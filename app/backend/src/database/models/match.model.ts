@@ -46,6 +46,7 @@ MatchModel.init({
   inProgress: {
     type: BOOLEAN,
     allowNull: false,
+    defaultValue: true,
   },
 }, {
   // ... Outras configs

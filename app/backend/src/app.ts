@@ -4,6 +4,7 @@ import verifyLoginFields from './middlewares/verifyLoginFields';
 import UserController from './controllers/user.controller';
 import validateJWT from './auth/validateJWT';
 import MatchController from './controllers/match.controller';
+import verifyMatchFields from './middlewares/verifyMatchFields';
 
 class App {
   public app: express.Express;
@@ -21,7 +22,10 @@ class App {
     this.app.post('/login', verifyLoginFields, UserController.login);
     this.app.get('/login/role', validateJWT, UserController.role);
 
+    this.app.patch('/matches/:id/finish', validateJWT, MatchController.updateInProgressById);
+    this.app.patch('/matches/:id', validateJWT, MatchController.updateById);
     this.app.get('/matches', MatchController.findAll);
+    this.app.post('/matches', validateJWT, verifyMatchFields, MatchController.create);
   }
 
   private config():void {

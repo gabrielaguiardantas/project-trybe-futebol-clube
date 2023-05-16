@@ -2,12 +2,6 @@ import * as sinon from 'sinon';
 import * as chai from 'chai';
 // @ts-ignore
 import chaiHttp = require('chai-http');
-
-import { app } from '../app';
-import { findAllMock } from './mocks/mockTeams';
-
-import { Response } from 'superagent';
-import TeamService from '../services/team.service';
 import UserModel from '../database/models/user.model';
 import UserService from '../services/user.service';
 import { validUserMock, validUserResultMock } from './mocks/mockUsers';
@@ -17,23 +11,17 @@ chai.use(chaiHttp);
 const { expect } = chai;
 
 describe('some tests in UserService', () => {
-  /**
-   * Exemplo do uso de stubs com tipos
-   */
-  let chaiHttpResponse: Response;
+
+  afterEach(async () => {
+    sinon.restore();
+  });
 
   describe('findByLogin', () => {
-    
-    afterEach(async () => {
-      sinon.restore();
-    });
-
     it('retorna um usuário válido ao receber email e password corretos', async () => {
       // arrange
-      sinon.stub(UserModel, 'findOne').resolves(validUserResultMock as UserModel);
-      sinon.stub(UserService, 'checkPassword').resolves(true);
+      sinon.stub(UserModel, 'findOne').resolves(validUserMock as UserModel);
       // act
-      const validUser = await UserService.findByLogin('user@user.com', 'qualquercoisa');
+      const validUser = await UserService.findByLogin('user@user.com', 'secret_user');
       // assert
       expect(validUser).to.be.deep.equal({ user: validUserResultMock });
     });
@@ -44,14 +32,6 @@ describe('some tests in UserService', () => {
       const invalidUser = await UserService.findByLogin('user@user.com', 'qualquercoisa');
       // assert
       expect(invalidUser).to.be.deep.equal({ json: { message: 'Invalid email or password' } });
-    })
+    });
   });
-
-  // it('...', async () => {
-  //   chaiHttpResponse = await chai
-  //      .request(app)
-  //      ...
-
-  //   expect(...)
-  // });
 });

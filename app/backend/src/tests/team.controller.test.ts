@@ -3,7 +3,6 @@ import * as chai from 'chai';
 // @ts-ignore
 import chaiHttp = require('chai-http');
 import { findAllMock } from './mocks/mockTeams';
-import TeamService from '../services/team.service';
 import TeamModel from '../database/models/team.model';
 import { app } from '../app';
 
@@ -12,15 +11,15 @@ chai.use(chaiHttp);
 const { expect } = chai;
 
 describe('some tests in TeamController', () => {
+
+  afterEach(() => {
+    sinon.restore();
+  })
+  
   describe('findAll', () => {
-
-    afterEach(async () => {
-      (TeamService.findAll as sinon.SinonStub).restore();
-    });
-
     it('retorna um array do mock e um status 200', async () => {
       // arrange
-      sinon.stub(TeamService, 'findAll').resolves(findAllMock as TeamModel[])
+      sinon.stub(TeamModel, 'findAll').resolves(findAllMock as TeamModel[])
       // act
       const response = await chai.request(app).get('/teams');
       // assert
@@ -30,14 +29,9 @@ describe('some tests in TeamController', () => {
   });
 
   describe('findById', () => {
-
-    afterEach(async () => {
-      (TeamService.findById as sinon.SinonStub).restore();
-    });
-    
     it('retorna um objeto do mock e um status 200', async () => {
       // arrange
-      sinon.stub(TeamService, 'findById').resolves(findAllMock[0] as TeamModel)
+      sinon.stub(TeamModel, 'findByPk').resolves(findAllMock[0] as TeamModel)
       // act
       const response = await chai.request(app).get('/teams/1');
       // assert

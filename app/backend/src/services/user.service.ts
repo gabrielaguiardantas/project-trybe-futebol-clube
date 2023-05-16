@@ -10,8 +10,9 @@ export default class UserService {
     if (user) {
       const validLogin = await UserService.checkPassword(password, user.password as string);
       if (validLogin) {
-        delete user.password;
-        return { user };
+        const newValidUser = { ...user };
+        delete newValidUser.password;
+        return { user: newValidUser };
       }
     }
     return { json: { message: 'Invalid email or password' } };
