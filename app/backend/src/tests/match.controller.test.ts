@@ -16,7 +16,9 @@ describe('some tests in MatchController', () => {
 
   afterEach(() => {
     sinon.restore();
-  }); 
+  });
+
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAdXNlci5jb20iLCJhZG1pbiI6ZmFsc2UsImlhdCI6MTY4NDMzNTU2MCwiZXhwIjoxNjg0NTk0NzYwfQ.QieacH1Ti1L9pKORenmQ7EC9eKnXBD9zqBuL9FPaCeU';
 
   describe('findAll', () => {
     it('retorna um array do mock e um status 200', async () => {
@@ -34,8 +36,7 @@ describe('some tests in MatchController', () => {
       // arrange
       sinon.stub(MatchModel, 'update').resolves([1]);
       // act
-      const response = await chai.request(app).patch('/matches/:id/finish').set('Authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAdXNlci5jb20iLCJpZCI6MiwiYWRtaW4iOmZhbHNlLCJpYXQiOjE2ODQyMzY4MzksImV4cCI6MTY4NDMyMzIzOX0.xWNO83l16DTJKegCnlvILk3PhRbOfhRnIOoynQ3pEZQ' 
-      );
+      const response = await chai.request(app).patch('/matches/:id/finish').set('Authorization', token);
       // assert
       expect(response.status).to.be.equal(200);
       expect(response.body).to.be.deep.equal({ message: 'Finished' });
@@ -46,8 +47,7 @@ describe('some tests in MatchController', () => {
       // arrange
       sinon.stub(MatchModel, 'update').resolves([1]);
       // act
-      const response = await chai.request(app).patch('/matches/:id').set('Authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAdXNlci5jb20iLCJpZCI6MiwiYWRtaW4iOmZhbHNlLCJpYXQiOjE2ODQyMzY4MzksImV4cCI6MTY4NDMyMzIzOX0.xWNO83l16DTJKegCnlvILk3PhRbOfhRnIOoynQ3pEZQ' 
-      );
+      const response = await chai.request(app).patch('/matches/:id').set('Authorization', token);
       // assert
       expect(response.status).to.be.equal(200);
       expect(response.body).to.be.deep.equal({ message: 'Finished' });
@@ -58,8 +58,7 @@ describe('some tests in MatchController', () => {
       // arrange
       sinon.stub(MatchModel, 'create').resolves({ dataValues: newMatchResult } as MatchModel);
       // act
-      const response = await chai.request(app).post('/matches').send(newMatchBodyMock).set('Authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAdXNlci5jb20iLCJpZCI6MiwiYWRtaW4iOmZhbHNlLCJpYXQiOjE2ODQyMzY4MzksImV4cCI6MTY4NDMyMzIzOX0.xWNO83l16DTJKegCnlvILk3PhRbOfhRnIOoynQ3pEZQ' 
-      );
+      const response = await chai.request(app).post('/matches').send(newMatchBodyMock).set('Authorization', token);
       // assert
       expect(response.status).to.be.equal(201);
       expect(response.body).to.be.deep.equal(newMatchResult);

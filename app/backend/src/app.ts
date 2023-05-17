@@ -26,6 +26,8 @@ class App {
     this.app.patch('/matches/:id', validateJWT, MatchController.updateById);
     this.app.get('/matches', MatchController.findAll);
     this.app.post('/matches', validateJWT, verifyMatchFields, MatchController.create);
+    this.app.get('/leaderboard/home', MatchController.leaderboardHome);
+    this.app.get('/leaderboard/away', MatchController.leaderboardAway);
   }
 
   private config():void {

@@ -11,7 +11,7 @@ export default class UserController {
         email: req.body.email,
         id: isValidLogin.user.id,
         admin: false };
-      const token = jwt.sign(payload, 'jwt_secret', { expiresIn: '1d' });
+      const token = jwt.sign(payload, 'jwt_secret', { expiresIn: '3d' });
       return res.status(200).json({ token });
     }
     return res.status(401).json(isValidLogin.json);

@@ -2,7 +2,7 @@ import * as sinon from 'sinon';
 import * as chai from 'chai';
 // @ts-ignore
 import chaiHttp = require('chai-http');
-import { findAllMock, newMatchBodyMock, newMatchResult, specificMatchMock } from './mocks/mockMatches';
+import { findAllMock, leaderboardDataMock, leaderboardTeamDataResultMock, newMatchBodyMock, newMatchResult, specificMatchMock } from './mocks/mockMatches';
 import MatchModel from '../database/models/match.model';
 import MatchService from '../services/match.service';
 import CompleteMatch from '../interfaces/completeMatch.interface';
@@ -58,4 +58,24 @@ describe('some tests in MatchService', () => {
       expect(newMatch).to.be.deep.equal(newMatchResult);
     });
   });
+  describe('leaderboardData', () => {
+    it('testando a saída', async () => {
+      // arrange
+      sinon.stub(MatchModel, 'findAll').resolves(leaderboardDataMock as MatchModel["dataValues"][]);
+      // act
+      const matches = await MatchService.leaderboardData(15);
+      // assert
+      expect(matches.length).to.be.equal(3);
+    });
+  });
+  describe('leaderboardTeamData', () => {
+    it('testando a saída para o time do São José-SP', async () => {
+      // arrange
+      sinon.stub(MatchModel, 'findAll').resolves(leaderboardDataMock as MatchModel["dataValues"][]);
+      // act
+      const saoJoseSpData = await MatchService.leaderboardTeamData(15, 'home');
+      // assert
+      expect(saoJoseSpData).to.be.deep.equal(leaderboardTeamDataResultMock);
+    })
+  })
 });

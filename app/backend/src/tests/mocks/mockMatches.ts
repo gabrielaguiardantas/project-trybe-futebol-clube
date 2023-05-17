@@ -51,4 +51,44 @@ const newMatchResult = {
   inProgress: true,
 };
 
-export { findAllMock, specificMatchMock, newMatchResult, newMatchBodyMock };
+const leaderboardDataMock = [
+  {
+    id: 8,
+    homeTeamId: 15,
+    homeTeamGoals: 0,
+    awayTeamId: 1,
+    awayTeamGoals: 1,
+    inProgress: 0
+  },
+  {
+    id: 23,
+    homeTeamId: 15,
+    homeTeamGoals: 2,
+    awayTeamId: 16,
+    awayTeamGoals: 3,
+    inProgress: 0
+  },
+  {
+    id: 37,
+    homeTeamId: 15,
+    homeTeamGoals: 0,
+    awayTeamId: 13,
+    awayTeamGoals: 1,
+    inProgress: 0
+  }
+];
+
+const leaderboardTeamDataResultMock = {
+  efficiency: "0.00",
+  goalsBalance: -3,
+  goalsFavor: 2,
+  goalsOwn: 5,
+  name: "São José-SP",
+  totalDraws: 0,
+  totalGames: 3,
+  totalLosses: 3,
+  totalPoints: 0,
+  totalVictories: 0
+}
+
+export { findAllMock, specificMatchMock, newMatchResult, newMatchBodyMock, leaderboardDataMock, leaderboardTeamDataResultMock };
