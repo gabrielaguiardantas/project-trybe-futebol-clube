@@ -1,6 +1,6 @@
 # Projeto Trybe Futebol Clube #
 
-Vigésimo quinto projeto do curso de desenvolvimento Web da Trybe e nono/último do módulo de Backend. Desenvolvi o backend/CRUD de uma aplicação de dados de futebol (rankings, partidas, resultados) utilizando Typescript, com TDD, atento aos paradigmas POO e aos princípios do SOLID (Primeiro contato com POO e SOLID). Principais conhecimentos desenvolvidos e aperfeiçoados nesse projeto:
+Vigésimo quinto projeto do curso de desenvolvimento Web da Trybe e nono/último do módulo de Backend. Desenvolvi o backend/CRUD de uma aplicação de dados de futebol (rankings, partidas e resultados) utilizando Typescript, com TDD, atento aos paradigmas POO e aos princípios do SOLID (Primeiro contato com POO e SOLID). Principais conhecimentos desenvolvidos e aperfeiçoados nesse projeto:
 
 - Typescript
 - POO (Programação Orientada a Objetos)
