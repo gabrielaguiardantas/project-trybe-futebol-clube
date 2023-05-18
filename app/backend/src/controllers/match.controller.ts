@@ -52,6 +52,14 @@ export default class MatchController {
     return res.status(200).json(resultOrdered);
   }
 
+  static async leaderboard(_req: Request, res: Response) {
+    const teams = await TeamService.findAll();
+    const result = await Promise
+      .all(teams.map((team) => MatchService.leaderboardTeamData(team.id)));
+    const resultOrdered = MatchController.correctSortLeaderboard(result);
+    return res.status(200).json(resultOrdered);
+  }
+
   private static correctSortLeaderboard(result: leaderboardTeamData[]): leaderboardTeamData[] {
     return result
       .sort((a, b) => b.totalPoints - a.totalPoints

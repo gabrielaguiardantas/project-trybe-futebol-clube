@@ -2,11 +2,13 @@ import * as sinon from 'sinon';
 import * as chai from 'chai';
 // @ts-ignore
 import chaiHttp = require('chai-http');
-import { findAllMock, newMatchBodyMock, newMatchResult } from './mocks/mockMatches';
+import { findAllMock, leaderboardDataMock, newMatchBodyMock, newMatchResult } from './mocks/mockMatches';
 import { app } from '../app';
 import CompleteMatch from '../interfaces/completeMatch.interface';
 import MatchModel from '../database/models/match.model';
 import MatchService from '../services/match.service';
+import MatchController from '../controllers/match.controller';
+import TeamModel from '../database/models/team.model';
 
 chai.use(chaiHttp);
 
@@ -62,6 +64,28 @@ describe('some tests in MatchController', () => {
       // assert
       expect(response.status).to.be.equal(201);
       expect(response.body).to.be.deep.equal(newMatchResult);
-    })
-  })
+    });
+  });
+  describe('leaderboardHome', () => {
+    it('retorna um array de times com seus dados respectivos e um status 200', async () => {
+      // arrange
+      sinon.stub(MatchModel, 'findAll').resolves(leaderboardDataMock as MatchModel["dataValues"][]);
+      // act
+      const response = await chai.request(app).get('/leaderboard/home');
+      // assert
+      expect(response.status).to.be.equal(200);
+      expect(response.body.length).to.be.deep.equal(16);
+    });
+  });
+  describe('leaderboardAway', () => {
+    it('retorna um array de times com seus dados respectivos e um status 200', async () => {
+      // arrange
+      sinon.stub(MatchModel, 'findAll').resolves(leaderboardDataMock as MatchModel["dataValues"][]);
+      // act
+      const response = await chai.request(app).get('/leaderboard/away');
+      // assert
+      expect(response.status).to.be.equal(200);
+      expect(response.body.length).to.be.deep.equal(16);
+    });
+  });
 });

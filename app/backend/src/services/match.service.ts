@@ -57,7 +57,6 @@ export default class MatchService {
     }
     if (filter === 'away') {
       const dataFiltered = data.filter((match) => match.awayTeamId === teamId);
-      console.log(dataFiltered);
       return dataFiltered;
     }
     return data;

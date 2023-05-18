@@ -91,4 +91,6 @@ const leaderboardTeamDataResultMock = {
   totalVictories: 0
 }
 
+const resultLeaderboardDataMock = '';
+
 export { findAllMock, specificMatchMock, newMatchResult, newMatchBodyMock, leaderboardDataMock, leaderboardTeamDataResultMock };
